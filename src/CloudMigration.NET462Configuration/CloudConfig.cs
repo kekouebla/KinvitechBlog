@@ -59,7 +59,7 @@ namespace CloudMigration.NET462Configuration
                     // 7 - Adds JSON file provider (Microsoft.Extensions.Configuration.Json, version 2.2.0)
                     config.AddJsonFile(@"appsettings.json", optional: true, reloadOnChange: true);
                     // 9 - Gets Spring Cloud Config Server active profiles
-                    context.HostingEnvironment.EnvironmentName = Environment.GetEnvironmentVariable(_hostingEnvironment);
+                    context.HostingEnvironment.EnvironmentName = String.IsNullOrEmpty(Environment.GetEnvironmentVariable(_hostingEnvironment)) ? "dev" : Environment.GetEnvironmentVariable(_hostingEnvironment);
                     // 10 - Adds Config Server provider with active profile (Steeltoe.Extensions.Configuration.ConfigServerBase, version 2.2.0)
                     config.AddConfigServer(context.HostingEnvironment.EnvironmentName);
 
