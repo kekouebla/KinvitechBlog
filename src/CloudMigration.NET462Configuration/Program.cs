@@ -14,6 +14,7 @@ namespace CloudMigration.NET462Configuration
             _configuration = CloudConfig.GetService<IConfiguration>();
 
             GetAppSettingsConfigurations();
+            GetConfigServerConfigurations();
 
             Console.WriteLine("Press any key to continue...");
             Console.ReadLine();
@@ -28,6 +29,19 @@ namespace CloudMigration.NET462Configuration
             sb.AppendLine(_configuration["HashiCorpTerraformUrl"]); //Note that the key with IConfiguration is case insensitive!
 
             Console.WriteLine(sb.ToString());
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
+        }
+
+        static void GetConfigServerConfigurations()
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine("hypress/spring-cloud-config-server configurations from https://github.com/kekouebla/KinvitechConfig ...");
+            sb.AppendLine(_configuration["configurationdbconnection"]);
+            sb.AppendLine(_configuration["hashicorpurl"]);
+            sb.AppendLine(_configuration["hashicorpterraformurl"]);
+
+            Console.WriteLine(sb.ToString());
+            Console.WriteLine("-----------------------------------------------------------------------------------------------------");
         }
     }
 }

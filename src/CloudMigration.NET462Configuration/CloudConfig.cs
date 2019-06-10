@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Steeltoe.Extensions.Configuration.ConfigServer;
 using System;
 using System.IO;
 
@@ -8,6 +9,11 @@ namespace CloudMigration.NET462Configuration
 {
     public class CloudConfig
     {
+        /// <summary>
+        /// 8 - Sets Spring Cloud Config Server active profiles
+        /// </summary>
+        private static readonly string _hostingEnvironment = "SPRING_PROFILES_ACTIVE";
+
         /// <summary>
         /// 1 - Sets the path to the appsettings.json file if running locally
         /// </summary>
@@ -48,10 +54,15 @@ namespace CloudMigration.NET462Configuration
                 .ConfigureAppConfiguration((context, config) =>
                 {
                     // Add configuration providers as needed:
-                    // 5 - Microsoft.Extensions.Configuration.Json, version 2.2.0
+                    // 6 - Sets file provider base path
                     config.SetBasePath(GetContentRoot());
+                    // 7 - Adds JSON file provider (Microsoft.Extensions.Configuration.Json, version 2.2.0)
                     config.AddJsonFile(@"appsettings.json", optional: true, reloadOnChange: true);
-                    
+                    // 9 - Gets Spring Cloud Config Server active profiles
+                    context.HostingEnvironment.EnvironmentName = Environment.GetEnvironmentVariable(_hostingEnvironment);
+                    // 10 - Adds Config Server provider with active profile (Steeltoe.Extensions.Configuration.ConfigServerBase, version 2.2.0)
+                    config.AddConfigServer(context.HostingEnvironment.EnvironmentName);
+
                 }).Build();
         }
     }
