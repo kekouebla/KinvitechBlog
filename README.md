@@ -4,9 +4,10 @@ Externalize .NET Framework version 4.6.2 application configuration with Spring C
 # Getting Started
 
 ### Installing docker:
-Install docker community edition for your supported platform (i.e. Linux, MacOS, Microsoft Window, etc.) at           https://docs.docker.com/install/.
+Install docker community edition for your supported platform (i.e. Linux, MacOS, Microsoft Window, etc.) at       https://docs.docker.com/install/.
+
 Verify the version of the  installation success by running at your command prompt the command: 
-docker --version
+- docker --version
 
 ### Configuring Spring Cloud Config Server docker image:
 - Run a docker container named spring-cloud-config-server using the latest version of hyness/spring-cloud-config-server image at   https://hub.docker.com/r/hyness/spring-cloud-config-server/ with the following environment variables and port.
@@ -17,14 +18,14 @@ docker --version
     - Bind port 8888 (host machine port:8888) of the container to port 8888 of the host (8888:container port)
       
 - Run the following command at your command prompt (in one line) to pull down the docker image:
-docker run -it --name=spring-cloud-config-server -p 8888:8888 -e    SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/kekouebla/KinvitechConfig -e SPRING_PROFILES_ACTIVE=dev hyness/spring-cloud-config-   server
+docker run -it --name=spring-cloud-config-server -p 8888:8888 -e    SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/kekouebla/KinvitechConfig -e SPRING_PROFILES_ACTIVE=dev hyness/spring-cloud-config-server
 
 - Run the following command at your command prompt to inspect the container for the environment variables and port:
-docker ps -a (to view a list of all containers).
-docker inspect <CONTAINER ID> (where CONTAINER ID is the ID of the spring cloud config server container image)
+  - docker ps -a (to view a list of all containers).
+  - docker inspect <CONTAINER ID> (where CONTAINER ID is the ID of the spring cloud config server container image)
   
 - Run the following command at your command prompt to a JSON response of the configuration file content if you have curl installed:
-curl http://localhost:8888/appdotnet462/dev
+  - curl http://localhost:8888/appdotnet462/dev
 
 
 ### Software dependencies
