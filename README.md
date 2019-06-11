@@ -9,6 +9,7 @@ For more information on Spring Cloud Config settings please visit https://cloud.
 
 # Getting Started
 1.	Installation process
+
       Installing docker:
       
       Install docker community edition for your supported platform (i.e. Linux, MacOS, Microsoft Window, etc.) at           https://docs.docker.com/install/.
@@ -36,6 +37,7 @@ For more information on Spring Cloud Config settings please visit https://cloud.
 
 
 2.	Software dependencies
+
       •	Microsoft.Extensions.Hosting, version 2.2.0
       •	Microsoft.Extensions.DependencyInjection, version 2.2.0
       •	Microsoft.Extensions.Configuration.Json, version 2.2.0
