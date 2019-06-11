@@ -22,7 +22,7 @@ Verify the version of the  installation success by running at your command promp
 
 - Run the following command at your command prompt to inspect the container for the environment variables and port:
   - docker ps -a (to view a list of all containers).
-  - docker inspect CONTAINER ID (where CONTAINER ID is the ID of the spring cloud config server container image)
+  - docker inspect CONTAINER_ID (where CONTAINER_ID is the ID of the spring cloud config server container image)
   
 - Run the following command at your command prompt to a JSON response of the configuration file content if you have curl installed:
   - curl http://localhost:8888/appdotnet462/dev
@@ -41,7 +41,7 @@ For more information on Spring Cloud Config settings please visit https://cloud.
 # Build and Test
 ### Repaving:
 Run the following two docker commands to destroy the Spring Cloud Config container and re-run the process with or without environment changes:
-- docker rm CONTAINER ID (where CONTAINER ID is the ID of the Spring Cloud Config Server container)
+- docker rm CONTAINER_ID (where CONTAINER_ID is the ID of the Spring Cloud Config Server container)
 - docker images (to get a list of all images)
-- docker rmi IMAGE ID (where IMAGE ID is the ID of the Spring Cloud Config Server image)
+- docker rmi IMAGE_ID (where IMAGE_ID is the ID of the Spring Cloud Config Server image)
 
