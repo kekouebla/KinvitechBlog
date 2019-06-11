@@ -1,19 +1,19 @@
 # Introduction 
 Externalize .NET Framework version 4.6.2 application configuration with Spring Cloud Config Server and GitHub repository.
 
-# Interfacing Spring Cloud Config Server docker with .NET App:
+#Interfacing Spring Cloud Config Server docker with .NET App:
 The communication between the Spring Cloud Config Server and the .NET App is made possible by the Steeltoe client library, the spring configuration in the appsettings.json file and the configuration file from GitHub repository at https://github.com/kekouebla/KinvitechConfig.  The Spring Cloud Config Server located at http://localhost:8888 reads the configuration file from GitHub repository https://github.com/kekouebla/KinvitechConfig.  The configuration file name must much the name of the application (i.e. appdotnet462) without the profile (i.e. dev) so that the configuration provider, through the Steeltoe configuration provider, reads the right configuration settings.  You can confirm this important setting by taking a look at the name of the application and the active profiles in the appsettings.json and the configuration file in the https://github.com/kekouebla/KinvitechConfig.  
 For more information on Spring Cloud Config settings please visit https://cloud.spring.io/spring-cloud-config/single/spring-cloud-config.html.
 
 
 # Getting Started
 1.	Installation process
-      # Installing docker:
+      #Installing docker:
       Install docker community edition for your supported platform (i.e. Linux, MacOS, Microsoft Window, etc.) at           https://docs.docker.com/install/.
       Verify the version of the  installation success by running at your command prompt the command: 
       docker --version
 
-      # Configuring Spring Cloud Config Server docker image:
+      #Configuring Spring Cloud Config Server docker image:
       Run a docker container named spring-cloud-config-server using the latest version of hyness/spring-cloud-config-server image at    https://hub.docker.com/r/hyness/spring-cloud-config-server/ with the following environment variables and port.
       •	Set environment variables
             o	SPRING_CLOUD_CONFIG_SERVER_GIT_URI
@@ -42,7 +42,7 @@ For more information on Spring Cloud Config settings please visit https://cloud.
 4.	API references
 
 # Build and Test
-# Repaving:
+#Repaving:
 Run the following two docker commands to destroy the Spring Cloud Config container and re-run the process with or without environment changes:
 docker rm <CONTAINER ID> (where CONTAINER ID is the ID of the Spring Cloud Config Server container)
 docker images (to get a list of all images)
