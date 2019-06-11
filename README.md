@@ -18,7 +18,7 @@ Verify the version of the  installation success by running at your command promp
     - Bind port 8888 (host machine port:8888) of the container to port 8888 of the host (8888:container port)
       
 - Run the following command at your command prompt (in one line) to pull down the docker image:
-docker run -it --name=spring-cloud-config-server -p 8888:8888 -e    SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/kekouebla/KinvitechConfig -e SPRING_PROFILES_ACTIVE=dev hyness/spring-cloud-config-server
+  - docker run -it --name=spring-cloud-config-server -p 8888:8888 -e SPRING_CLOUD_CONFIG_SERVER_GIT_URI=https://github.com/kekouebla/KinvitechConfig -e SPRING_PROFILES_ACTIVE=dev hyness/spring-cloud-config-server
 
 - Run the following command at your command prompt to inspect the container for the environment variables and port:
   - docker ps -a (to view a list of all containers).
