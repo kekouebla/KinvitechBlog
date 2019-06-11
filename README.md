@@ -39,8 +39,11 @@ For more information on Spring Cloud Config settings please visit https://cloud.
 2.	Software dependencies
 
       •	Microsoft.Extensions.Hosting, version 2.2.0
+      
       •	Microsoft.Extensions.DependencyInjection, version 2.2.0
+      
       •	Microsoft.Extensions.Configuration.Json, version 2.2.0
+      
       •	Steeltoe.Extensions.Configuration.ConfigServerBase, version 2.2.0
 
 3.	Latest releases
