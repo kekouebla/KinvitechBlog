@@ -5,7 +5,6 @@ Externalize .NET Framework version 4.6.2 application configuration with Spring C
 
 ### Installing docker:
 Install docker community edition for your Microsoft Window supported platform at https://docs.docker.com/install/.
-
 Verify the version of the  installation success by running at your command prompt the command: 
 - docker --version
 
