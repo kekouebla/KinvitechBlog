@@ -1,23 +1,18 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Steeltoe.Extensions.Configuration.ConfigServer;
+using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 
-namespace CloudMigration.NET462Configuration
+namespace CloudMigration.NET462Logging
 {
     public class CloudConfig
     {
         /// <summary>
-        /// 8 - Sets Spring Cloud Config Server active profiles
-        /// </summary>
-        private static readonly string _hostingEnvironment = "SPRING_PROFILES_ACTIVE";
-
-        /// <summary>
         /// 1 - Sets the path to the appsettings.json file if running locally
         /// </summary>
-        private static readonly string APP_CONTEXT_BASE_DIRECTORY = @"C:\Kinvitech\GitHub\Repos\Kinvitech.Blog\src\CloudMigration.NET462Configuration";
+        private static readonly string APP_CONTEXT_BASE_DIRECTORY = @"C:\Kinvitech\GitHub\Repos\Kinvitech.Blog\src\CloudMigration.NET462Logging";
 
         /// <summary>
         /// 2 - Returns the appsettings.json full path
@@ -41,7 +36,7 @@ namespace CloudMigration.NET462Configuration
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         public static T GetService<T>()
-        {            
+        {
             return builder.Services.GetService<T>();
         }
 
@@ -53,18 +48,28 @@ namespace CloudMigration.NET462Configuration
             builder = new HostBuilder()
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
-                    var env = hostingContext.HostingEnvironment;
                     // Add configuration providers as needed:
-                    // 6 - Sets file provider base path
+                    // 5 - Sets file provider base path
                     config.SetBasePath(GetContentRoot());
-                    // 7 - Adds JSON file provider (Microsoft.Extensions.Configuration.Json, version 2.2.0)
+                    // 6 - Adds JSON file provider (Microsoft.Extensions.Configuration.Json, version 2.2.0)
                     config.AddJsonFile(@"appsettings.json", optional: true, reloadOnChange: true);
-                    // 9 - Gets Spring Cloud Config Server active profiles
-                    env.EnvironmentName = String.IsNullOrEmpty(Environment.GetEnvironmentVariable(_hostingEnvironment)) ? "dev" : Environment.GetEnvironmentVariable(_hostingEnvironment);
-                    // 10 - Adds Config Server provider with active profile (Steeltoe.Extensions.Configuration.ConfigServerBase, version 2.2.0)
-                    config.AddConfigServer(env.EnvironmentName);
-
-                }).Build();
+                })
+                .ConfigureServices((hostingContext, services) =>
+                {
+                    // Add services as needed:
+                    // 7 - Adds logging service
+                    services.AddLogging();
+                })
+                .ConfigureLogging((hostingContext, logging) =>
+                {
+                    // 8 - Sets up logging to look for configuration in Logging section
+                    logging.AddConfiguration(hostingContext.Configuration.GetSection("Logging"));
+                    // 9 - Sets up logging for the Console provider
+                    logging.AddConsole();
+                    // 10 - Sets up logging for the Debug provider
+                    logging.AddDebug();
+                })
+                .Build();
         }
     }
 }
