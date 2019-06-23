@@ -61,6 +61,9 @@ namespace CloudMigration.NET462SessionState
                     // Add services as needed:
                     // 8 - Adds StackExchange IConnectionMultiplexer
                     services.AddRedisConnectionMultiplexer(hostingContext.Configuration);
+                    // 10 - Adds Microsoft Extensions Caching Redis IDistributedCache
+                    // It works like IConnectionMultiplexer.
+                    services.AddDistributedRedisCache(hostingContext.Configuration);
                 }).Build();
         }
     }
