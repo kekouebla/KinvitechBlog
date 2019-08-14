@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/kinvitech/kinvitech/_apis/build/status/kekouebla.KinvitechBlog?branchName=develop)](https://dev.azure.com/kinvitech/kinvitech/_build/latest?definitionId=1&branchName=develop)
+
 # Introduction 
   - Externalize .NET Framework version 4.6.2 application configuration with Spring Cloud Config Server and GitHub repository.
   - Trace the behavior of .NET Framework version 4.6.2 application by streaming log events with Microsoft Extensions Logging.
