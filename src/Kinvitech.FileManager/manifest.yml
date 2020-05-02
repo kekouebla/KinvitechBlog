@@ -1,0 +1,21 @@
+﻿---
+env:
+  ArchiveFolder: \Archive
+  ErrorFolder: \Error
+  IncomingFolder: \Incoming
+  ProcessingFolder: \Processing
+  ResponseFolder: \Response
+  VolumeServiceUserDomain: domain
+  VolumeServiceUserName: bldradminb
+  VolumeServiceUserPassword: Pentest16
+  archiveFolderCheckHours: 1
+  deleteFilesOlderThanDays: 730
+  incomingFolderCheckSeconds: 30
+  incomingFolderCheckStartupDelaySeconds: 5
+  SfgCheckInSeconds: 900
+  SfgHost: sftp-address-or-dns
+  SfgPort: 22
+  SfgUsername: username
+  SfgPassword: password
+  SfgPath: Outbox
+  SfgDownloadOn: true

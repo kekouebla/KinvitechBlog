@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.kinvitech.com/BillHub"
+	targetNamespace="http://www.kinvitech.com/BillHub" elementFormDefault="qualified">
+
+
+  <simpleType name="Tms20">
+    <restriction base="string">
+      <pattern value="\d{20}"></pattern>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="Tms26">
+    <restriction base="string">
+      <pattern value="\d{4}-\d{2}-\d{2}-\d{2}\.\d{2}\.\d{2}\.\d{6}"></pattern>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="ID20">
+    <restriction base="string">
+      <maxLength value="20"></maxLength>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="ID32">
+    <restriction base="string">
+      <maxLength value="32"></maxLength>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="ID36">
+    <restriction base="string">
+      <maxLength value="36"></maxLength>
+    </restriction>
+  </simpleType>
+
+
+  <simpleType name="ID50">
+    <restriction base="string">
+      <maxLength value="50"></maxLength>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="ID60">
+    <restriction base="string">
+      <maxLength value="60"></maxLength>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="ID80">
+    <restriction base="string">
+      <maxLength value="80"></maxLength>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="ID256">
+    <restriction base="string">
+      <maxLength value="256"></maxLength>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="ID1024">
+    <restriction base="string">
+      <maxLength value="1024"></maxLength>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="BinaryFlag">
+    <restriction base="string">
+      <enumeration value="Y"></enumeration>
+      <enumeration value="N"></enumeration>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="money">
+    <restriction base="decimal">
+      <fractionDigits value="2"/>
+    </restriction>
+  </simpleType>
+
+  <simpleType name="URI1024">
+    <restriction base="anyURI">
+      <maxLength value="1024"></maxLength>
+    </restriction>
+  </simpleType>
+
+
+
+</schema>
