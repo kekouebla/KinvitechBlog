@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.kinvitech.com/BillHub"
+	targetNamespace="http://www.kinvitech.com/BillHub" elementFormDefault="qualified">
+
+  <include schemaLocation="BillHubTypes.xsd" />
+
+  <element name="AcctPropMgmtFile" nillable="true" type="tns:AccountPropertyManagmentFile" />
+
+  <complexType name="AccountPropertyManagmentFile">
+    <sequence>
+      <!-- File Header Record required.-->
+      <element minOccurs="1" maxOccurs="1" name="Header" type="tns:AcctPropertyHeaderRecord" />
+      <!--List of Accounts-->
+      <element minOccurs="0" maxOccurs="unbounded" name="Account" type="tns:AcctPropertyRecord" />
+      <!-- File Footer Record required, includes  file  result summary-->
+      <element minOccurs="1" maxOccurs="1" name="Footer" type="tns:AcctPropertyFooterRecord" />
+    </sequence>
+  </complexType>
+
+  <complexType name="AcctPropertyHeaderRecord">
+    <sequence>
+      <!--File scope Incremental or Global-->
+      <element minOccurs="1" maxOccurs="1" name="FlScp" type="tns:FileScopeType" />
+      <!--Unique identifier for the sender.  Will be provided by the Biller Solutions-->
+      <element minOccurs="1" maxOccurs="1" name="FlSndrId" type="tns:ID32" />
+      <!--Timestamp when sender started creating the file-->
+      <element minOccurs="1" maxOccurs="1" name="FlCrtTms" type="dateTime" />
+      <!--<element minOccurs="1" maxOccurs="1" name="BlrFlNm" type="tns:ID60" />-->
+    </sequence>
+  </complexType>
+
+  <simpleType name="FileScopeType">
+    <restriction base="string">
+      <!--If file is Incremental i.e. only the account which are Added/Update are included inthe file.-->
+      <enumeration value="Incremental" />
+      <!--If file is Global i.e. Biller hs provided all the accounts including the account that doesnt have any change.-->
+      <enumeration value="Global" />
+    </restriction>
+  </simpleType>
+
+  <complexType name="AcctPropertyRecord">
+    <sequence>
+      <!--BAN - Consumer's Billing Account Number-->
+      <element minOccurs="1" maxOccurs="1" name="BAN" type="tns:ID32" />
+      <!--NBAN - Consumer's New Billing Account Number-->
+      <element minOccurs="0" maxOccurs="1" name="NBAN" type="tns:ID32" />
+      <!--ABAN - Consumer's Aletrnate Billing Account Number, as defined in Biller system-->
+      <element minOccurs="0" maxOccurs="1" name="ABAN" type="tns:ID32" />
+      <!--BlrId - BillerID i.e. Unique ID associated with a biller-->
+      <element minOccurs="1" maxOccurs="1" name="BlrId" type="tns:ID32" />
+      <!--Account status could be Active/Inactive-->
+      <element minOccurs="1" maxOccurs="1" name="Status" type="tns:StatusType" />
+      <!--Account status effective timestamp, as in the time when Account became Active/Inactive in biller system-->
+      <element minOccurs="0" maxOccurs="1" name="StatusEfctTms" type="dateTime" />
+      <!--List of Document state, Doc State can be more then one depending on the type of Document supported by biller-->
+      <element minOccurs="0" maxOccurs="1" name="DocSvcState" type="tns:DocumentServiceState" />
+      <!--Features for which account is enabled Payment\Ebill etc.-->
+      <element minOccurs="0" maxOccurs="1" name="Features" type="tns:Feature" />
+      <!--Account eligibility criteria, Biller need to provide Service holder address, preauthtoken etc.-->
+      <element minOccurs="0" maxOccurs="unbounded" name="AcctElgb" type="tns:AccountEligibilityRecord" />
+      <!--Contact information tied to the account-->
+      <element minOccurs="0" maxOccurs="unbounded" name="Contact" type="tns:Contact" />
+      <!--Remit address associated with the account-->
+      <element minOccurs="0" maxOccurs="1" name="RemitAddr" type="tns:Addr" />
+    </sequence>
+  </complexType>
+
+  <simpleType name="StatusType">
+    <restriction base="string">
+      <enumeration value="Active" />
+      <enumeration value="Inactive" />
+    </restriction>
+  </simpleType>
+
+  <complexType name="DocumentServiceState">
+    <sequence>
+      <!--This property will the identification of a Document Type-->
+      <element minOccurs="1" maxOccurs="1" name="DocTp" type="tns:DocType" />
+      <!--This property will the identification of a Product Type-->
+      <element minOccurs="0" maxOccurs="1" name="ProductTp" type="tns:ProductType" />
+      <!--This property will the identification of a Document Type-->
+      <element minOccurs="1" maxOccurs="1" name="Status" type="tns:StatusType" />
+      <!--This property will the identification of a Document Type-->
+      <element minOccurs="1" maxOccurs="1" name="StatusEfctTms" type="dateTime" />
+      <!--This property will the provide details of Document Paper Supression State-->
+      <element minOccurs="1" maxOccurs="1" name="PprSprsd" type="tns:BinaryFlag" />
+      <!--This property will the provide details of Paper Supression effective timestamp-->
+      <element minOccurs="1" maxOccurs="1" name="PprSprsdEfctTms" type="dateTime" />
+    </sequence>
+  </complexType>
+
+  <simpleType name="DocType">
+    <restriction base="string">
+      <enumeration value="EbillDocument" />
+    </restriction>
+  </simpleType>
+
+  <simpleType name="ProductType">
+    <restriction base="string">
+      <!--If document is active in Biller system, then value wil be Biller-->
+      <enumeration value="Biller" />
+      <!--If document is active in Fiserv distribution system, then value wil be Fiserv-->
+      <enumeration value="Fiserv" />
+    </restriction>
+  </simpleType>
+
+  <complexType name="Feature">
+    <sequence>
+      <!--Payment Feature -->
+      <element minOccurs="0" maxOccurs="1" name="Payment" type="tns:PaymentPropertyRecord" />
+      <!--Ebill  Feature -->
+      <element minOccurs="0" maxOccurs="1" name="Ebill" type="tns:EbillPropertyRecord" />
+    </sequence>
+  </complexType>
+
+  <complexType name="PaymentPropertyRecord">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="PymtBlkCd" type="tns:PaymentBlockingCodeType" />
+      <!--Payment Cap for an account-->
+      <element minOccurs="0" maxOccurs="1" name="PmntCp" type="tns:money" />
+      <!--Remit Tag-->
+      <element minOccurs="0" maxOccurs="1" name="RmtTg" type="tns:ID50" />
+      <!--Last payment date -->
+      <element minOccurs="0" maxOccurs="1" name="LstPymtDt" type="date" />
+      <!--Last payment amount -->
+      <element minOccurs="0" maxOccurs="1" name="LstPymtAmt" type="tns:money" />
+      <!--Account balance date, should be in past-->
+      <element minOccurs="0" maxOccurs="1" name="AcctBlnDt" type="date" />
+      <!--Account balance amount-->
+      <element minOccurs="0" maxOccurs="1" name="AcctBlnAmt" type="tns:money" />
+      <!--Amount Due on account-->
+      <element minOccurs="0" maxOccurs="1" name="AcctAmtDue" type="tns:money" />
+      <!--Mimimum amount due on a account-->
+      <element minOccurs="0" maxOccurs="1" name="AcctMinAmtDue" type="tns:money" />
+      <!--Past amount due-->
+      <element minOccurs="0" maxOccurs="1" name="PstAmtDue" type="tns:money" />
+      <!--Paymnt model Recurring\Automatic allowed-->
+      <element minOccurs="0" maxOccurs="1" name="PymtMdlAlwd" type="tns:BinaryFlag" />
+    </sequence>
+  </complexType>
+
+  <complexType name="EbillPropertyRecord">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="EbillElgb" type="boolean" />
+      <element minOccurs="0" maxOccurs="1" name="EbillNotElgbResnCode" type="string" />
+    </sequence>
+  </complexType>
+
+  <simpleType name="PaymentBlockingCodeType">
+    <restriction base="string">
+      <enumeration value="PBS00" />
+      <enumeration value="PBS11" />
+      <enumeration value="PBS12" />
+      <enumeration value="PBS13" />
+      <enumeration value="PBS14" />
+      <enumeration value="PBS15" />
+      <enumeration value="PBS16" />
+      <enumeration value="PBS17" />
+      <enumeration value="PBS18" />
+      <enumeration value="PBS19" />
+      <enumeration value="PBS20" />
+      <enumeration value="PBS21" />
+      <enumeration value="PBS22" />
+      <enumeration value="PBS23" />
+      <enumeration value="PBS24" />
+      <enumeration value="PBS25" />
+      <enumeration value="PBS26" />
+      <enumeration value="PBS27" />
+      <enumeration value="PBS28" />
+      <enumeration value="PBS29" />
+      <enumeration value="PBS30" />
+      <enumeration value="PBS31" />
+      <enumeration value="PBS32" />
+      <enumeration value="PBS33" />
+      <enumeration value="PBS34" />
+      <enumeration value="PBS35" />
+      <enumeration value="PBS36" />
+      <enumeration value="PBS37" />
+      <enumeration value="PBS38" />
+      <enumeration value="PBS39" />
+      <enumeration value="PBS40" />
+      <enumeration value="PBS41" />
+    </restriction>
+  </simpleType>
+
+  <complexType name="AccountEligibilityRecord">
+    <sequence>
+      <element minOccurs="1" maxOccurs="1" name="ElgbCd" type="tns:FeatureEligibilityCodeType" />
+      <element minOccurs="1" maxOccurs="1" name="ElgbVl" type="tns:ID32" />
+    </sequence>
+  </complexType>
+
+  <simpleType name="FeatureEligibilityCodeType">
+    <restriction base="string">
+      <!--Service Holder Address line 1-->
+      <enumeration value="SH1" />
+      <!--Service Holder Address line 2-->
+      <enumeration value="SH2" />
+      <!--Service Holder Address line 3-->
+      <enumeration value="SH3" />
+      <!--Service Holder Address line 4-->
+      <enumeration value="SH4" />
+      <!--Service Holder Address line 5-->
+      <enumeration value="SH5" />
+      <!--Service Holder Address line 6-->
+      <enumeration value="SH6" />
+      <!--Service Holder Address line 7-->
+      <enumeration value="SH7" />
+      <!--Service Holder Address line 8-->
+      <enumeration value="SH8" />
+      <!--Pre-Auth token 1-->
+      <enumeration value="PL1" />
+      <!--Pre-Auth token 2-->
+      <enumeration value="PL2" />
+      <!--Pre-Auth token 3-->
+      <enumeration value="PL3" />
+      <!--Pre-Auth token 4-->
+      <enumeration value="PL4" />
+      <!--Pre-Auth token 5-->
+      <enumeration value="PL5" />
+    </restriction>
+  </simpleType>
+
+  <complexType name="AcctPropertyFooterRecord">
+    <sequence>
+      <!--Count of Account provided in the APM file-->
+      <element minOccurs="1" maxOccurs="1" name="AccntHdrRecCnt" type="integer" />
+    </sequence>
+  </complexType>
+
+  <complexType name="Contact">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="FName" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="MName" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="LName" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="BusName" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="DayPhone" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="EvePhone" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="MPhone" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="Email" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="ServiceAddr" type="tns:Addr" />
+      <element minOccurs="0" maxOccurs="1" name="BillingAddr" type="tns:Addr" />
+      <element minOccurs="0" maxOccurs="1" name="DoB" type="date" />
+      <element minOccurs="0" maxOccurs="1" name="Last4SSN" type="string" />
+    </sequence>
+  </complexType>
+
+  <complexType name="Addr">
+    <sequence>
+      <element minOccurs="0" maxOccurs="1" name="Addr1" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="Addr2" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="Addr3" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="City" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="State" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="Country" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="Zip" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="ZipExt" type="string" />
+      <element minOccurs="0" maxOccurs="1" name="DeliveryPt" type="string" />
+    </sequence>
+  </complexType>
+
+</schema>

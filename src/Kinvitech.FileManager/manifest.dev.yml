@@ -1,0 +1,6 @@
+﻿---
+inherit: manifest.yml
+applications:
+- name: Kinvitech.FileManager-dev
+env:
+  VolumeServiceUNC: \\network\share\location-dev

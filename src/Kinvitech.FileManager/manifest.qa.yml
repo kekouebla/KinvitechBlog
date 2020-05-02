@@ -1,0 +1,6 @@
+﻿---
+inherit: manifest.yml
+applications:
+- name: Kinvitech.FileManager.qa
+env:
+  VolumeServiceUNC: \\network\share\location-qa
