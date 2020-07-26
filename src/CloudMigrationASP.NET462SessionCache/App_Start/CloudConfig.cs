@@ -54,9 +54,9 @@ namespace CloudMigrationASP.NET462SessionCache
                     var env = hostingContext.HostingEnvironment;
                     // Add configuration providers as needed:
                     // 5 - Sets file provider base path
-                    config.SetBasePath(GetContentRoot());
+                    //config.SetBasePath(GetContentRoot());
                     // 6 - Adds JSON file provider (Microsoft.Extensions.Configuration.Json, version 2.2.0)
-                    config.AddJsonFile(@"appsettings.json", optional: true, reloadOnChange: true);
+                    //config.AddJsonFile(@"appsettings.json", optional: true, reloadOnChange: true);
 
                 })
                 .ConfigureServices((hostingContext, services) =>
