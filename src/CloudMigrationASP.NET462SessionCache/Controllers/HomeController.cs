@@ -87,12 +87,12 @@ namespace CloudMigrationASP.NET462SessionCache.Controllers
             ViewBag.command5 = "CLIENT LIST";
             ViewBag.command5Result = _redisServer.Execute("CLIENT", "LIST").ToString().Replace(" id=", "\rid=");
 
-            if (_lazyConnection.Value != null)
-            {
-                _lazyConnection.Value.Dispose();
-            }
+            //if (_lazyConnection.Value != null)
+            //{
+            //    _lazyConnection.Value.Dispose();
+            //}
             
-            _connectionMultiplexer.Dispose();
+            //_connectionMultiplexer.Dispose();
 
             return View();
         }

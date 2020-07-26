@@ -12,7 +12,7 @@ namespace CloudMigration.NET462SessionState
         /// <summary>
         /// 1 - Sets the path to the appsettings.json file if running locally
         /// </summary>
-        private static readonly string APP_CONTEXT_BASE_DIRECTORY = @"C:\Kinvitech\GitHub\Repos\Kinvitech.Blog\src\CloudMigration.NET462SessionState";
+        private static readonly string APP_CONTEXT_BASE_DIRECTORY = @"C:\Users\Kinvi Ekoue-Bla\Source\Repos\KinvitechBlog\src\CloudMigration.NET462SessionState";
 
         /// <summary>
         /// 2 - Returns the appsettings.json full path
@@ -51,9 +51,9 @@ namespace CloudMigration.NET462SessionState
                     var env = hostingContext.HostingEnvironment;
                     // Add configuration providers as needed:
                     // 6 - Sets file provider base path
-                    config.SetBasePath(GetContentRoot());
+                    //config.SetBasePath(GetContentRoot());
                     // 7 - Adds JSON file provider (Microsoft.Extensions.Configuration.Json, version 2.2.0)
-                    config.AddJsonFile(@"appsettings.json", optional: true, reloadOnChange: true);
+                    //config.AddJsonFile(@"appsettings.json", optional: true, reloadOnChange: true);
 
                 })
                 .ConfigureServices((hostingContext, services) =>
