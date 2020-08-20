@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/kinvitech/kinvitech/_apis/build/status/kekouebla.KinvitechBlog%20(1)?branchName=develop)](https://dev.azure.com/kinvitech/kinvitech/_build/latest?definitionId=2&branchName=develop)
+[![Build Status](https://dev.azure.com/kinvitech/kinvitech/_apis/build/status/kekouebla.KinvitechBlog?branchName=refs%2Fpull%2F18%2Fmerge)](https://dev.azure.com/kinvitech/kinvitech/_build/latest?definitionId=2&branchName=refs%2Fpull%2F18%2Fmerge)
 
 # Introduction 
   - Externalize .NET Framework version 4.6.2 application configuration with Spring Cloud Config Server and GitHub repository.
